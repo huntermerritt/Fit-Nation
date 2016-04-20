@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
+    
     @IBOutlet weak var tableView: UITableView!
     
     var friends: [String] = []
@@ -34,6 +35,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        tableView.layer.cornerRadius = 25
+        tableView.clipsToBounds = true
         
     }
     
@@ -95,10 +98,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print(error)
             }
             
-
-            }) { (error) -> Void in
-                
-                print("Error: " + error.localizedDescription)
+            
+        }) { (error) -> Void in
+            
+            print("Error: " + error.localizedDescription)
         }
         
     }
@@ -107,7 +110,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return friends.count
+        return friends.count * 2
     }
     
     
@@ -116,22 +119,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "cell")
         
-        let studentClass = savedFriends.indexOf(friends[indexPath.row])
-        
-        if studentClass != nil
+        if indexPath.row % 2 == 0
         {
-            let classIdentifier = friendClasses[studentClass!]
             
-            cell.textLabel?.text = friends[indexPath.row] + " : " + classIdentifier
-            cell.detailTextLabel?.text = "Daily Step Average: " + "\(stepsArray[indexPath.row])" + "  " + getGrade(stepsArray[indexPath.row])
+            let studentClass = savedFriends.indexOf(friends[indexPath.row / 2])
+            
+            cell.layer.cornerRadius = 25
+            cell.clipsToBounds = true
+            
+            if studentClass != nil
+            {
+                let classIdentifier = friendClasses[studentClass!]
+                
+                cell.textLabel?.text = friends[indexPath.row / 2] + " : " + classIdentifier
+                cell.detailTextLabel?.text = "Daily Step Average: " + "\(stepsArray[indexPath.row / 2])" + "  " + getGrade(stepsArray[indexPath.row / 2])
+            }
+            else
+            {
+                cell.textLabel?.text = friends[indexPath.row]
+                cell.detailTextLabel?.text = "Daily Step Average: " + "\(stepsArray[indexPath.row / 2])" + "  " + getGrade(stepsArray[indexPath.row / 2])
+            }
+            
         }
         else
         {
-            cell.textLabel?.text = friends[indexPath.row]
-            cell.detailTextLabel?.text = "Daily Step Average: " + "\(stepsArray[indexPath.row])" + "  " + getGrade(stepsArray[indexPath.row])
+            cell.backgroundColor = UIColor.clearColor()
         }
-        
-        
         
         return cell
     }
@@ -143,48 +156,51 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
     {
-        return true
+        return false
     }
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
-        let alert = UIAlertController()
-        
-        var actions: [UIAlertAction] = []
-        
-        print(classes)
-        
-        for num in 0 ..< classes.count
+        if indexPath.row % 2 == 0
         {
             
-            actions.append(UIAlertAction(title: classes[num], style: .Default, handler: { (action) in
+            let alert = UIAlertController()
+            
+            var actions: [UIAlertAction] = []
+            
+            print(classes)
+            
+            for num in 0 ..< classes.count
+            {
+                
+                actions.append(UIAlertAction(title: classes[num], style: .Default, handler: { (action) in
+                    
+                    
+                    print(self.friendClasses.count)
+                    
+                    self.friendClasses.insert(action.title!, atIndex: indexPath.row)
+                    
+                    
+                    self.friendClasses.removeAtIndex(indexPath.row + 1)
+                    self.defaults.setObject(self.friendClasses, forKey: "friendClasses")
+                    self.tableView.reloadData()
+                    
+                    
+                }))
                 
                 
-                print(self.friendClasses.count)
+                alert.addAction(actions[num])
+            }
+            
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: { (action) in
                 
-                self.friendClasses.insert(action.title!, atIndex: indexPath.row)
-                
-                
-                self.friendClasses.removeAtIndex(indexPath.row + 1)
-                self.defaults.setObject(self.friendClasses, forKey: "friendClasses")
-                self.tableView.reloadData()
-                
-                
+                alert.dismissViewControllerAnimated(true, completion: nil)
             }))
             
+            presentViewController(alert, animated: true, completion: nil)
             
-            alert.addAction(actions[num])
         }
-        
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: { (action) in
-            
-            alert.dismissViewControllerAnimated(true, completion: nil)
-        }))
-        
-        presentViewController(alert, animated: true, completion: nil)
-        
         
     }
     
@@ -292,6 +308,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }))
             
             presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        if indexPath.row % 2 == 0
+        {
+            return 100 //cell height
+        }
+        else
+        {
+            return 10 //space heigh
         }
     }
     

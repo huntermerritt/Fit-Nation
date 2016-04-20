@@ -152,6 +152,22 @@ class specificClassViewController: UIViewController, UITableViewDelegate, UITabl
             
             cell.textLabel?.text = friends[indexPath.row] + " : " + classIdentifier
             cell.detailTextLabel?.text = getGrade(stepsArray[indexPath.row])
+            
+            if (Double)(stepsArray[indexPath.row]) / gradeNum <= 0.7
+            {
+                cell.backgroundColor = UIColor.redColor()
+                cell.imageView?.image = UIImage(named: "bad")
+            }
+            else if (Double)(stepsArray[indexPath.row]) / gradeNum <= 0.9
+            {
+                cell.backgroundColor = UIColor.yellowColor()
+                cell.imageView?.image = UIImage(named: "fitness")
+            }
+            else
+            {
+                cell.backgroundColor = UIColor.greenColor()
+                cell.imageView?.image = UIImage(named: "FitNation")
+            }
         }
         return cell
     }

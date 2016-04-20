@@ -10,12 +10,13 @@ import UIKit
 import OAuthSwift
 
 class PEClassViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     
     @IBOutlet weak var tableView: UITableView!
     
     var defaults = NSUserDefaults.standardUserDefaults()
     var classes: [String] = []
+    var friendClasses: [String] = []
     var sendingClassName = ""
     var oauthswift : OAuth2Swift! = nil
     var parameters: [String: AnyObject]!
@@ -23,15 +24,21 @@ class PEClassViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if defaults.arrayForKey("classes") != nil
         {
             classes = defaults.arrayForKey("classes") as! [String]
         }
+        if defaults.arrayForKey("friendClasses") != nil
+        {
+            friendClasses = defaults.arrayForKey("friendClasses") as! [String]
+        }
         
         print(classes)
+        
+        self.title = "Groups"
     }
-
+    
     
     @IBAction func newClass(sender: AnyObject)
     {
@@ -75,7 +82,7 @@ class PEClassViewController: UIViewController, UITableViewDataSource, UITableVie
         return classes.count
     }
     
-   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = UITableViewCell(style: .Default, reuseIdentifier: "cell")
         
@@ -101,11 +108,62 @@ class PEClassViewController: UIViewController, UITableViewDataSource, UITableVie
             next.parameters = self.parameters
             next.oauthswift = self.oauthswift
             next.headers = self.headers
-
+            
             
         }
         
     }
     
-
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        var temp: [UITableViewRowAction] = []
+        
+        var remove = UITableViewRowAction(style: .Default, title: "Remove Group") { (action, path) in
+            
+            tableView.beginUpdates()
+            
+            var titleText = tableView.cellForRowAtIndexPath(indexPath)?.textLabel?.text
+            
+            var loc = self.classes.indexOf((titleText)!)
+            
+            if loc != nil
+            {
+                self.classes.removeAtIndex(loc!)
+            }
+            
+            self.defaults.setObject(self.classes, forKey: "classes")
+            
+            var friendsLoc = self.friendClasses.indexOf(titleText!)
+            
+            while friendsLoc != nil
+            {
+                self.friendClasses.removeAtIndex(friendsLoc!)
+                self.friendClasses.insert(" ", atIndex: friendsLoc!)
+                friendsLoc = self.friendClasses.indexOf(titleText!)
+            }
+            
+            self.defaults.setObject(self.friendClasses, forKey: "friendClasses")
+            
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
+            
+            tableView.endUpdates()
+            tableView.reloadData()
+            
+        }
+     
+        remove.backgroundColor = UIColor.redColor()
+        
+        
+        temp.append(remove)
+        
+        
+        return temp
+        
+    }
+    
+    
 }
