@@ -37,6 +37,11 @@ class PEClassViewController: UIViewController, UITableViewDataSource, UITableVie
         print(classes)
         
         self.title = "Groups"
+        
+        tableView.rowHeight = 100
+        
+        tableView.layer.cornerRadius = 25
+        tableView.clipsToBounds = true
     }
     
     
@@ -85,6 +90,9 @@ class PEClassViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = UITableViewCell(style: .Default, reuseIdentifier: "cell")
+        
+        cell.layer.cornerRadius = 25
+        cell.clipsToBounds = true
         
         cell.textLabel?.text = classes[indexPath.row]
         
@@ -164,6 +172,8 @@ class PEClassViewController: UIViewController, UITableViewDataSource, UITableVie
         return temp
         
     }
+    
+    
     
     
 }

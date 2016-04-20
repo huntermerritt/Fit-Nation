@@ -34,6 +34,11 @@ class specificClassViewController: UIViewController, UITableViewDelegate, UITabl
         
         //masterErase()
         
+        tableView.rowHeight = 100
+        
+        tableView.layer.cornerRadius = 25
+        tableView.clipsToBounds = true
+        
         if defaults.arrayForKey("classes") != nil
         {
             classes = defaults.arrayForKey("classes") as! [String]
@@ -169,6 +174,10 @@ class specificClassViewController: UIViewController, UITableViewDelegate, UITabl
                 cell.imageView?.image = UIImage(named: "FitNation")
             }
         }
+        
+        cell.layer.cornerRadius = 25
+        cell.clipsToBounds = true
+        
         return cell
     }
     
