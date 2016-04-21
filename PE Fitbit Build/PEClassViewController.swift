@@ -4,7 +4,8 @@
 //
 //  Created by hmerritt and adrewno1 on 4/8/16.
 //  Copyright © 2016 shedtechsolutions. All rights reserved.
-//
+// revised
+// new comment
 
 import UIKit
 import OAuthSwift
@@ -37,6 +38,11 @@ class PEClassViewController: UIViewController, UITableViewDataSource, UITableVie
         print(classes)
         
         self.title = "Groups"
+        
+        tableView.rowHeight = 100
+        
+        tableView.layer.cornerRadius = 25
+        tableView.clipsToBounds = true
     }
     
     
@@ -85,6 +91,9 @@ class PEClassViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = UITableViewCell(style: .Default, reuseIdentifier: "cell")
+        
+        cell.layer.cornerRadius = 25
+        cell.clipsToBounds = true
         
         cell.textLabel?.text = classes[indexPath.row]
         
@@ -164,6 +173,8 @@ class PEClassViewController: UIViewController, UITableViewDataSource, UITableVie
         return temp
         
     }
+    
+    
     
     
 }

@@ -4,7 +4,7 @@
 //
 //  Created by hmerritt on 4/7/16.
 //  Copyright © 2016 shedtechsolutions. All rights reserved.
-//
+// github test
 
 import UIKit
 import OAuthSwift
@@ -110,7 +110,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return friends.count * 2
+        return friends.count
     }
     
     
@@ -119,10 +119,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "cell")
         
-        if indexPath.row % 2 == 0
-        {
+       
             
-            let studentClass = savedFriends.indexOf(friends[indexPath.row / 2])
+            let studentClass = savedFriends.indexOf(friends[indexPath.row])
             
             cell.layer.cornerRadius = 25
             cell.clipsToBounds = true
@@ -131,20 +130,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 let classIdentifier = friendClasses[studentClass!]
                 
-                cell.textLabel?.text = friends[indexPath.row / 2] + " : " + classIdentifier
-                cell.detailTextLabel?.text = "Daily Step Average: " + "\(stepsArray[indexPath.row / 2])" + "  " + getGrade(stepsArray[indexPath.row / 2])
+                cell.textLabel?.text = friends[indexPath.row] + " : " + classIdentifier
+                cell.detailTextLabel?.text = "Daily Step Average: " + "\(stepsArray[indexPath.row])" + "  " + getGrade(stepsArray[indexPath.row])
             }
             else
             {
                 cell.textLabel?.text = friends[indexPath.row]
-                cell.detailTextLabel?.text = "Daily Step Average: " + "\(stepsArray[indexPath.row / 2])" + "  " + getGrade(stepsArray[indexPath.row / 2])
+                cell.detailTextLabel?.text = "Daily Step Average: " + "\(stepsArray[indexPath.row])" + "  " + getGrade(stepsArray[indexPath.row])
             }
             
-        }
-        else
-        {
-            cell.backgroundColor = UIColor.clearColor()
-        }
+        
         
         return cell
     }
@@ -162,8 +157,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.row % 2 == 0
-        {
+        
             
             let alert = UIAlertController()
             
@@ -200,7 +194,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             presentViewController(alert, animated: true, completion: nil)
             
-        }
+        
         
     }
     
@@ -313,14 +307,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if indexPath.row % 2 == 0
-        {
+        
             return 100 //cell height
-        }
-        else
-        {
-            return 10 //space heigh
-        }
+       
     }
     
 }
