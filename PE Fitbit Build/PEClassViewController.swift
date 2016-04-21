@@ -2,7 +2,7 @@
 //  PEClassViewController.swift
 //  PE Fitbit Build
 //
-//  Created by hmerritt on 4/8/16.
+//  Created by hmerritt and adrewno1 on 4/8/16.
 //  Copyright © 2016 shedtechsolutions. All rights reserved.
 // revised
 // new comment
