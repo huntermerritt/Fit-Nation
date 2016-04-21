@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0D34E41CC9397900F8E672 /* studentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D34E31CC9397900F8E672 /* studentViewController.swift */; };
 		3F58C3181CB815C200F7CCA2 /* PEClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F58C3171CB815C200F7CCA2 /* PEClassViewController.swift */; };
 		3F58C31A1CB8499000F7CCA2 /* specificClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F58C3191CB8498F00F7CCA2 /* specificClassViewController.swift */; };
 		3F8838801CC00B7800B8722F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F88387F1CC00B7800B8722F /* Settings.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F0D34E31CC9397900F8E672 /* studentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = studentViewController.swift; sourceTree = "<group>"; };
 		3F58C3171CB815C200F7CCA2 /* PEClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEClassViewController.swift; sourceTree = "<group>"; };
 		3F58C3191CB8498F00F7CCA2 /* specificClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = specificClassViewController.swift; sourceTree = "<group>"; };
 		3F88387F1CC00B7800B8722F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				3F58C3191CB8498F00F7CCA2 /* specificClassViewController.swift */,
 				3F88387F1CC00B7800B8722F /* Settings.swift */,
 				3F8AE1B41CB6BD8800CBBA0E /* Main.storyboard */,
+				3F0D34E31CC9397900F8E672 /* studentViewController.swift */,
 				3F8AE1B71CB6BD8800CBBA0E /* Assets.xcassets */,
 				3F8AE1B91CB6BD8800CBBA0E /* LaunchScreen.storyboard */,
 				3F8AE1BC1CB6BD8800CBBA0E /* Info.plist */,
@@ -225,6 +228,7 @@
 				3F8838801CC00B7800B8722F /* Settings.swift in Sources */,
 				3F8AE1B31CB6BD8800CBBA0E /* ViewController.swift in Sources */,
 				3F58C31A1CB8499000F7CCA2 /* specificClassViewController.swift in Sources */,
+				3F0D34E41CC9397900F8E672 /* studentViewController.swift in Sources */,
 				3F937CD71CBFF94A00781836 /* entryViewController.swift in Sources */,
 				3F8AE1B11CB6BD8800CBBA0E /* AppDelegate.swift in Sources */,
 				3F58C3181CB815C200F7CCA2 /* PEClassViewController.swift in Sources */,
