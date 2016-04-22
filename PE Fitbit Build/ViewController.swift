@@ -140,6 +140,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
         
+            cell.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.3)
+        
         
         return cell
     }
